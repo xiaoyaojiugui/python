@@ -1,0 +1,41 @@
+requests
+urllib3
+
+# database
+pymysql
+pymongo
+redis
+
+selenium
+Scrapy
+Twisted
+
+## 科学计算
+# NumPy(Numerical Python)基于Python的科学计算第三方库，提供了矩阵，线性代数，傅立叶变换等等的解决方案。
+NumPy
+# SciPy(Scientific Python)包含的模块有最优化、线性代数、积分、插值、特殊函数、快速傅里叶变换、信号处理和图像处理、常微分方程求解和其他科学与工程中常用的计算。
+SciPy
+# 用Python实现的类matlab的第三方库，用以绘制一些高质量的数学二维图形。
+Matplotlib
+
+IPython
+# 代码分析及日志记录
+# Python代码分析工具，用于分析代码错误、查找不符合代码风格标准（Pylint默认使用的代码风格是PEP8）和有潜在问题的代码
+# pylint
+# Python代码自动编排工具，它使用pep8工具来排版并可修复大部分pep8工具中报告的排版问题
+autopep8
+pep8
+pep8ify
+# 用来取代python的标准库日志模块：logging
+logbook
+
+# 机器学习库
+scikit-learn
+# 自然语言处理库
+nltk
+# 深度学习库，非常流行的一个深度学习库，在学术界用的比较多
+theano
+
+tensorflow==2.0.0a0
+# 对theano和tensorflow的一个高层封装，非常简单易用
+keras

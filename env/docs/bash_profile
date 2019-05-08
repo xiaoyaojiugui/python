@@ -1,0 +1,13 @@
+# /bin  存放所有用户皆可用的系统程序，系统启动或者系统修复时可用
+# /sbin 存放超级用户才能使用的系统程序
+# /usr/bin 存放所有用户都可用的应用程序
+# /usr/sbin 存放超级用户才能使用的应用程序
+# /usr/local/bin 存放所有用户都可用的与本地机器无关的程序
+# /usr/local/sbin 存放超级用户才能使用的与本地机器无关的程序
+
+alias zip='zip -x "*/\.*" -x "\.*"'
+# 将环境变量加到PATH变量中
+SPATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/bin/zsh
+export PATH=$SPATH
+
+# 配置eval变量

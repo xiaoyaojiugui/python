@@ -1,0 +1,23 @@
+# /bin  存放所有用户皆可用的系统程序，系统启动或者系统修复时可用
+# /sbin 存放超级用户才能使用的系统程序
+# /usr/bin 存放所有用户都可用的应用程序
+# /usr/sbin 存放超级用户才能使用的应用程序
+# /usr/local/bin 存放所有用户都可用的与本地机器无关的程序
+# /usr/local/sbin 存放超级用户才能使用的与本地机器无关的程序
+
+# 配置python3安装目录，执行命令：pyenv which python3
+export PYTHON_HOME=/Users/jason/.pyenv/versions/3.6.5
+alias python2=/usr/bin/python
+alias python3=/usr/local/bin/python3
+alias python=python3
+
+# 配置pip3安装目录，执行命令：pyenv which pip3
+export PIP_HOME=/Users/jason/.pyenv/versions/3.6.5
+alias pip2=/usr/bin/pip
+alias pip3=/usr/local/bin/pip3
+alias pip=pip3
+
+alias zip='zip -x "*/\.*" -x "\.*"'
+# 将环境变量加到PATH变量中
+SPATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/bin/zsh
+export PATH=$SPATH:$PYTHON_HOME/bin:$PIP_HOME/bin
