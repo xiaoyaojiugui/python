@@ -1,0 +1,35 @@
+requests
+urllib3
+
+# database
+pymysql
+pymongo
+redis
+
+selenium
+Scrapy
+Twisted
+
+## 科学计算
+# 用Python实现的类matlab的第三方库，用以绘制一些高质量的数学二维图形。
+#Matplotlib
+# 基于Python的科学计算第三方库，提供了矩阵，线性代数，傅立叶变换等等的解决方案。
+NumPy
+# 基于Python的matlab实现，旨在实现matlab的所有功能。
+SciPy
+
+IPython
+
+logbook
+Python-docx
+
+# 机器学习库
+scikit-learn
+# 自然语言处理库
+nltk
+# 深度学习库，非常流行的一个深度学习库，在学术界用的比较多
+theano
+
+tensorflow==1.13.1
+# 对theano和tensorflow的一个高层封装，非常简单易用
+keras
