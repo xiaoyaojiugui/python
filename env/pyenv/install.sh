@@ -68,7 +68,7 @@ function write_bash_profile() {
     fi
 
     # 获取配置文件路径
-    bash_profile=$(dirname ~/.bash_profile)"/"$(basename ~/.bash_profile)
+    bash_profile=$HOME"/"$(basename ~/.bash_profile)
     # 判断需要添加的配置是否存在
     alias_name=$(grep -w 'export PYTHON_HOME' $bash_profile)
     if [ ! -z "$alias_name" ]; then

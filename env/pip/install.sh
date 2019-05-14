@@ -42,11 +42,11 @@ function write_mirror() {
         echo "将阿里云pip国内镜像的配置，写在文件["$(ls *)"]中"
         cat >$file_name <<EOF
 [global]
-index-url = http://mirrors.aliyun.com/pypi/simple/
+index-url = https://mirrors.aliyun.com/pypi/simple/
 [install]
 trusted-host = mirrors.aliyun.com
 [list]
-format = columns   # pip list格式设置
+format = columns
 EOF
         cat $file_name
     fi
@@ -55,7 +55,7 @@ EOF
 
 # 将配置文件写入.bash_profile
 function write_bash_profile() {
-    #获取python安装路径
+    #获取pip安装路径
     soft_link="/usr/local/bin/pip3"
     relative_path=$(pyenv which pip3)
     if [ -f $soft_link ]; then
@@ -95,8 +95,8 @@ ${text_prefix}
 
 # 配置pip3安装目录，执行命令：pyenv which pip3
 export PIP_HOME=${dirname_path%/*}
-alias pip2=/usr/local/bin/pip2
-alias pip3=$soft_link
+alias pip2=$PIP_HOME/bin/pip2
+alias pip3=$PIP_HOME/bin/pip3
 alias pip=pip3
 
 ${text_middle}:\$PIP_HOME/bin
