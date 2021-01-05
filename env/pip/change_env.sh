@@ -13,7 +13,7 @@ basepath=$(
     cd $(dirname $0)
     pwd
 )
-echo "---------------脚本位置["${basepath}",$1]---------------"
+echo "---------------脚本位置["${basepath}"]---------------"
 
 function check_pyenv_virtualenv() {
     # $@表示函数的所有参数
@@ -73,7 +73,7 @@ EOF
         start_num=$(grep -n 'alias zip' $bash_profile | tail -n 1 | cut -d ":" -f1)
         # 文本总行数
         total_num=$(cat $bash_profile | wc -l)
-        # 获取关键字“配置eval变量”的开始行数
+        # 获取关键字“配置eval变量”的开始行数`
         eval_num=$(grep -n '配置eval变量' $bash_profile | tail -n 1 | cut -d ":" -f1)
         # 文本前缀部分
         text_prefix=$(sed -n "1,$(($start_num - 1))p" $bash_profile)

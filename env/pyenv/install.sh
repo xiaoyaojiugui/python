@@ -18,18 +18,21 @@ echo "---------------脚本位置["${basepath}"]---------------"
 function check_pyenv_install() {
     # $@表示函数的所有参数
     for app_name in $@; do
-        echo "检查[${app_name}]应用是否安装"
+        echo "1、检查[${app_name}]应用是否安装"
         exist=$(brew list $app_name)
+        echo ""
         # 用(echo $?)取得上一条命令的返回值并判断，Linux中0表示True，非0表示False。
         exec_status=$(echo $?)
         if [ $exec_status == "0" ]; then
-            echo "["${app_name}"]应用已安装，查看版本号：pyenv --version"
+            echo "2、["${app_name}"]应用已安装，查看版本号：$app_name --version"
             pyenv --version
+            echo ""
         else
-            echo "["${app_name}"]应用未安装，执行命令：brew install ${app_name}"
+            echo "2、["${app_name}"]应用未安装，执行命令：brew install ${app_name}"
             brew install $app_name
             # 对数据进行更新
             pyenv rehash
+            echo ""
         fi
     done
     return 0
@@ -38,17 +41,19 @@ function check_pyenv_install() {
 function check_python_install() {
     # $@表示函数的所有参数
     for python_version in $@; do
-        echo "检查[python $python_version]是否安装"
+        echo "3、检查[python $python_version]是否安装"
         exist=$(pyenv global $python_version)
+        echo ""
         # 用(echo $?)取得上一条命令的返回值并判断，Linux中0表示True，非0表示False。
         exec_status=$(echo $?)
         if [ $exec_status == "0" ]; then
-            echo "[python]已安装，查看版本号：pyenv versions"
+            echo "4、[python]已安装，查看版本号：pyenv versions"
             pyenv versions | awk NR!=1{print}
+            echo ""
         else
-            echo "[python]已安装，执行命令：pyenv install ${python_version}"
+            echo "4、[python]已安装，执行命令：pyenv install ${python_version}"
             pyenv install $python_version
-            echo "配置[python]环境变量，执行命令：pyenv global ${python_version}"
+            echo "4、配置[python]环境变量，执行命令：pyenv global ${python_version}"
             pyenv global $python_version
         fi
     done
@@ -61,9 +66,9 @@ function write_bash_profile() {
     soft_link="/usr/local/bin/python3"
     relative_path=$(pyenv which python3)
     if [ -f $soft_link ]; then
-        echo "软链接已存在[${soft_link}]，无需重复创建"
+        echo "5、软链接已存在[${soft_link}]，无需重复创建"
     else
-        echo "创建软链接，执行命令：ln -s $relative_path $soft_link"
+        echo "5、创建软链接，执行命令：ln -s $relative_path $soft_link"
         ln -s $relative_path $soft_link
     fi
 
@@ -72,13 +77,13 @@ function write_bash_profile() {
     # 判断需要添加的配置是否存在
     alias_name=$(grep -w 'export PYTHON_HOME' $bash_profile)
     if [ ! -z "$alias_name" ]; then
-        echo "配置信息已存在["${alias_name}"]"
+        echo "6、配置信息已存在["${alias_name}"]"
     else
-        echo "查看python安装路径，$(dirname $relative_path)"
+        echo "6、查看python安装路径，$(dirname $relative_path)"
         dirname_path=$(dirname $relative_path)
 
         echo "配置信息不存在，将文件写入["${bash_profile}"]"
-        # 获取根据关键字查询的行数，开始行数
+        # 获取关键字查询的开始行数
         start_num=$(grep -n 'alias zip' $bash_profile | tail -n 1 | cut -d ":" -f1)
         # 文本总行数
         total_num=$(cat $bash_profile | wc -l)

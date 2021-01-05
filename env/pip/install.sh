@@ -21,10 +21,10 @@ function create_file() {
     path_names=(${rootpath})
     for path in ${path_names[@]}; do
         if [ ! -d $path ]; then
-            echo "创建文件夹["${path}"]"
+            echo "1、创建文件夹["${path}"]"
             mkdir -p -v ${path}
         else
-            echo "文件夹已存在["${path}"]"
+            echo "1、文件夹已存在["${path}"]"
         fi
     done
     return 0
@@ -35,11 +35,11 @@ function write_mirror() {
     file_name="pip.conf"
     cd ${rootpath}
     if [ -f $file_name ]; then
-        echo "文件已存在["${rootpath}/$file_name"]"
+        echo "2、文件已存在["${rootpath}/$file_name"]"
         return 0
     else
         touch $file_name
-        echo "将阿里云pip国内镜像的配置，写在文件["$(ls *)"]中"
+        echo "2、将阿里云pip国内镜像的配置，写在文件["$(ls *)"]中"
         cat >$file_name <<EOF
 [global]
 index-url = https://mirrors.aliyun.com/pypi/simple/
@@ -59,9 +59,9 @@ function write_bash_profile() {
     soft_link="/usr/local/bin/pip3"
     relative_path=$(pyenv which pip3)
     if [ -f $soft_link ]; then
-        echo "软链接已存在[${soft_link}]，无需重复创建"
+        echo "3、软链接已存在[${soft_link}]，无需重复创建"
     else
-        echo "创建软链接，执行命令：ln -s $relative_path $soft_link"
+        echo "3、创建软链接，执行命令：ln -s $relative_path $soft_link"
         ln -s $relative_path $soft_link
     fi
 
@@ -70,12 +70,12 @@ function write_bash_profile() {
     # 判断需要添加的配置是否存在
     alias_name=$(grep -w 'export PIP_HOME' $bash_profile)
     if [ ! -z "$alias_name" ]; then
-        echo "配置信息已存在["${alias_name}"]"
+        echo "4、配置信息已存在["${alias_name}"]"
     else
-        echo "查看python安装路径，$(dirname $relative_path)"
+        echo "4、查看python安装路径，$(dirname $relative_path)"
         dirname_path=$(dirname $relative_path)
 
-        echo "配置信息不存在，将文件写入["${bash_profile}"]"
+        echo "5、配置信息不存在，将文件写入["${bash_profile}"]"
         # 获取根据关键字查询的行数，开始行数
         start_num=$(grep -n 'alias zip' $bash_profile | tail -n 1 | cut -d ":" -f1)
         # 文本总行数
@@ -130,5 +130,5 @@ echo "---------------函数开始执行---------------"
 create_file
 write_mirror
 write_bash_profile
-install_pip_txt
+# install_pip_txt
 echo "---------------函数执行完毕---------------"

@@ -21,47 +21,54 @@ if [ -z "$name" ]; then
 fi
 
 function check_homebrew_install() {
-    echo "检查[homebrew]是否安装"
+    echo "1、检查[homebrew]是否安装"
     exist=$(brew -v)
+    echo ""
     # 用(echo $?)取得上一条命令的返回值并判断，Linux中0表示True，非0表示False。
     exec_status=$(echo $?)
     if [ $exec_status == "0" ]; then
-        echo "[homebrew]应用已安装，查看版本号：brew -v"
+        echo "2、[homebrew]应用已安装，查看版本号：brew -v"
         # 打印文本第一行：awk 'NR==1{print}'
         brew -v
+        echo ""
     else
-        echo "[homebrew]应用未安装，执行安装命令"
+        echo "2、[homebrew]应用未安装，执行安装命令"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        echo ""
     fi
     return 0
 }
 
 function tsinghua_mirrors() {
     if [[ $name == "qinghua" ]]; then
-        echo "更换镜像["${name}"]，执行命令：cd $(brew --repo)"
+        echo "3、更换镜像["${name}"]，执行命令：cd $(brew --repo)"
         cd "$(brew --repo)"
         git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git
         git remote -v
+        echo ""
 
-        echo "更换镜像["${name}"]，执行命令：cd $(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        echo "4、更换镜像["${name}"]，执行命令：cd $(brew --repo)/Library/Taps/homebrew/homebrew-core"
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
         git remote set-url origin https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git
         git remote -v
+        echo ""
     fi
     return 0
 }
 
 function homebrew_mirrors() {
     if [ $name == "homebrew" ]; then
-        echo "更换镜像["${name}"]，执行命令：cd $(brew --repo)"
+        echo "3、更换镜像["${name}"]，执行命令：cd $(brew --repo)"
         cd "$(brew --repo)"
         git remote set-url origin https://github.com/Homebrew/brew.git
         git remote -v
+        echo ""
 
-        echo "更换镜像["${name}"]，执行命令：cd $(brew --repo)/Library/Taps/homebrew/homebrew-core"
+        echo "4、更换镜像["${name}"]，执行命令：cd $(brew --repo)/Library/Taps/homebrew/homebrew-core"
         cd "$(brew --repo)/Library/Taps/homebrew/homebrew-core"
         git remote set-url origin https://github.com/Homebrew/homebrew-core
         git remote -v
+        echo ""
     fi
     return 0
 }
